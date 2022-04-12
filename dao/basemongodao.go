@@ -35,7 +35,7 @@ func (daoMongo BaseMongoDao) Edit(mapParams *map[string]interface{}, commonsPara
 		if returnError == nil {
 			// Guardamos los datos con la transación
 			collection := transactionFactory.(*mongo.Database).Collection(data.(entity.Tabler).TableName())
-			_, err := collection.UpdateOne(context.TODO(), bson.M{"_id": utils.GetPkValue(data, "Id")}, data)
+			_, err := collection.UpdateOne(context.TODO(), bson.M{"_id": utils.GetPkValue(data, "ID")}, data)
 			returnErrorEdit = err
 
 			// En el caso de que se haya guardado de forma correcta guardamos
@@ -84,7 +84,7 @@ func (daoMongo BaseMongoDao) Add(mapParams *map[string]interface{}, commonsParam
 			if err == nil {
 
 				if result.InsertedID != nil {
-					utils.AddPkValue(data, result.InsertedID, "Id")
+					utils.AddPkValue(data, result.InsertedID, "ID")
 				}
 
 				returnData = data
@@ -117,7 +117,7 @@ func (daoMongo BaseMongoDao) Delete(mapParams *map[string]interface{}, commonsPa
 		if returnError == nil {
 			// Guardamos los datos con la transación
 			collection := transactionFactory.(*mongo.Database).Collection(data.(entity.Tabler).TableName())
-			_, err := collection.DeleteOne(context.TODO(), bson.M{"_id": utils.GetPkValue(data, "Id")})
+			_, err := collection.DeleteOne(context.TODO(), bson.M{"_id": utils.GetPkValue(data, "ID")})
 			returnErrorMethod = err
 
 			// En el caso de que se haya guardado de forma correcta guardamos

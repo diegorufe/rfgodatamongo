@@ -7,5 +7,5 @@ import (
 // BaseAuditIntPkEntity entidad base de auditoria para todas la entidades de gorm con pk
 type BaseAuditIntPkEntity struct {
 	BaseAuditEntity
-	Id primitive.ObjectID `bson:"_id" json:"id"`
+	ID primitive.ObjectID `bson:"_id" json:"id"`
 }
