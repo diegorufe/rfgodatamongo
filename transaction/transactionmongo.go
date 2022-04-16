@@ -12,6 +12,7 @@ import (
 // Revisar la clase de definición ITransaction
 type TransactionMongo struct {
 	Transaction *mongo.Database // Transación de gorm para poder realizar consultas
+	Ctx         context.Context // Contexto de la transacción
 }
 
 func (transactionMongo TransactionMongo) RollBack() error {
@@ -34,6 +35,7 @@ func (transactionMongo TransactionMongo) TransactionFactory() interface{} {
 func (transactionMongo TransactionMongo) StartTransactionContext(dbConnection interface{}, ctx context.Context, mapParamsService *map[string]interface{}) {
 	var db *mongo.Database = dbConnection.(*mongo.Database)
 	transactionMongo.Transaction = db
+	transactionMongo.Ctx = ctx
 	(*mapParamsService)[core.ParamTransaction] = transactionMongo
 }
 
